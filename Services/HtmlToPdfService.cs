@@ -21,7 +21,7 @@ public class HtmlToPdfService
         var base64Encoded = Convert.ToBase64String(plainTextBytes);
         
         _logger.LogInformation("Launching browser...");
-        var browser = await Puppeteer.LaunchAsync(new LaunchOptions
+        await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions
         {
             Headless = true,
             ExecutablePath = _puppeteerConfig.BrowserExecutablePath,
@@ -29,7 +29,7 @@ public class HtmlToPdfService
         });
         
         _logger.LogInformation("Opening new tab...");
-        var page = await browser.NewPageAsync();
+        await using var page = await browser.NewPageAsync();
         
         _logger.LogInformation("Navigating to data URL...");
         await page.GoToAsync("data:text/html;base64," + base64Encoded);
