@@ -11,3 +11,8 @@ func azure functionapp publish <functionappname> --dotnet-isolated
 
 ## Usage
 To use this function, post HTML to the function URL. The function will return a PDF file.
+
+Here's an example using `curl`:
+```bash
+curl -X POST -H "Content-Type: text/html" -d "<h1>Hello world!</h1><p>This PDF was rendered with Chromium!</p>" <function-url> -o output.pdf
+```
