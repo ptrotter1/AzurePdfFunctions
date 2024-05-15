@@ -37,9 +37,6 @@ public class HtmlToPdfService
         _logger.LogInformation("Generating PDF...");
         var stream = await page.PdfStreamAsync();
 
-        _logger.LogInformation("Closing browser...");
-        await browser.CloseAsync();
-
         return stream;
     }
 }
