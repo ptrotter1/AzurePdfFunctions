@@ -1,5 +1,4 @@
 using AzurePdfFunctions.Services;
-using AzurePdfFunctions.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
@@ -24,7 +23,7 @@ namespace AzurePdfFunctions
             _logger.LogInformation("HtmlToPdfStreamHttpPost triggered.");
             var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var pdfStream = await _htmlToPdfService.GetPdf(requestBody);
-            return new DisposingFileStreamResult(pdfStream, "application/pdf");
+            return new FileStreamResult(pdfStream, "application/pdf");
         }
     }
 }
